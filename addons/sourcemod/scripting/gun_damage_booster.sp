@@ -2,7 +2,7 @@
 #include <sdktools>
 #pragma semicolon 1
 #pragma newdecls required
-#define GDB_VERSION "4.0"
+#define GDB_VERSION "4.5"
 
 public Plugin myinfo =
 {
@@ -324,11 +324,7 @@ stock bool bIsSystemValid()
 	ExplodeString(sConVarModes, ",", sModeName, sizeof(sModeName), sizeof(sModeName[]));
 	for (int iMode = 0; iMode < sizeof(sModeName); iMode++)
 	{
-		if (StrContains(sGameMode, sModeName[iMode], false) == -1 && sModeName[iMode][0] != '\0')
-		{
-			return false;
-		}
-		else
+		if (StrContains(sGameMode, sModeName[iMode], false) != -1 && sModeName[iMode][0] != '\0')
 		{
 			return true;
 		}
@@ -337,14 +333,10 @@ stock bool bIsSystemValid()
 	ExplodeString(sConVarModes, ",", sModeName, sizeof(sModeName), sizeof(sModeName[]));
 	for (int iMode = 0; iMode < sizeof(sModeName); iMode++)
 	{
-		if (StrContains(sGameMode, sModeName[iMode], false) != -1 && sModeName[iMode][0] != '\0')
-		{
-			return false;
-		}
-		else
+		if (StrContains(sGameMode, sModeName[iMode], false) == -1 && sModeName[iMode][0] != '\0')
 		{
 			return true;
 		}
 	}
-	return true;
+	return false;
 }

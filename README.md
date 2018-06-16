@@ -210,6 +210,7 @@ gdb_tactical "25"
 You must specify the game modes in the gdb_enabledgamemodes and gdb_disabledgamemodes convars.
 
 Here are some scenarios and their outcomes:
+
 - Scenario 1
 ```
 gdb_enabledgamemodes "" // The plugin is enabled in all game modes.

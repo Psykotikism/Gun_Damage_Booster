@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 4.5 (June 16, 2018)
+
+1. Bug fixes:
+
+- Fixed the gdb_enabledgamemodes and gdb_disabledgamemodes convars not working properly.
+
 ## Version 4.0 (June 13, 2018)
 
 1. Combined all different versions into 1 file.
