@@ -1,8 +1,9 @@
+// Gun Damage Booster
 #include <sourcemod>
 #include <sdktools>
 #pragma semicolon 1
 #pragma newdecls required
-#define GDB_VERSION "4.5"
+#define GDB_VERSION "5.0"
 
 public Plugin myinfo =
 {
@@ -19,6 +20,7 @@ ConVar g_cvGDBChrome;
 ConVar g_cvGDBDisabledGameModes;
 ConVar g_cvGDBEnable;
 ConVar g_cvGDBEnabledGameModes;
+ConVar g_cvGDBGameMode;
 ConVar g_cvGDBHunting;
 ConVar g_cvGDBM16;
 ConVar g_cvGDBM60;
@@ -54,6 +56,7 @@ public void OnPluginStart()
 	g_cvGDBDisabledGameModes = CreateConVar("gdb_disabledgamemodes", "", "Disable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\n(Empty: None)\n(Not empty: Disabled in these game modes.)", _, true, 0.0, true, 99999.0);
 	g_cvGDBEnable = CreateConVar("gdb_enable", "1", "Enable the Gun Damage Booster?\n(0: OFF)\n(1: ON)", _, true, 0.0, true, 99999.0);
 	g_cvGDBEnabledGameModes = CreateConVar("gdb_enabledgamemodes", "", "Enable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\n(Empty: None)\n(Not empty: Enabled in these game modes.)", _, true, 0.0, true, 99999.0);
+	g_cvGDBGameMode = FindConVar("mp_gamemode");
 	g_cvGDBHunting = CreateConVar("gdb_hunting", "45", "Damage boost for the Hunting Rifle.", _, true, 0.0, true, 99999.0);
 	g_cvGDBM16 = CreateConVar("gdb_m16", "40", "Damage boost for the M16 Assault Rifle.", _, true, 0.0, true, 99999.0);
 	g_cvGDBM60 = CreateConVar("gdb_m60", "45", "Damage boost for the M60 Assault Rifle.", _, true, 0.0, true, 99999.0);
@@ -317,26 +320,26 @@ stock bool bIsSurvivor(int client)
 stock bool bIsSystemValid()
 {
 	char sGameMode[32];
-	char sConVarModes[2049];
-	char sModeName[64][32];
-	FindConVar("mp_gamemode").GetString(sGameMode, sizeof(sGameMode));
+	char sConVarModes[32];
+	g_cvGDBGameMode.GetString(sGameMode, sizeof(sGameMode));
+	Format(sGameMode, sizeof(sGameMode), ",%s,", sGameMode);
 	g_cvGDBEnabledGameModes.GetString(sConVarModes, sizeof(sConVarModes));
-	ExplodeString(sConVarModes, ",", sModeName, sizeof(sModeName), sizeof(sModeName[]));
-	for (int iMode = 0; iMode < sizeof(sModeName); iMode++)
+	if (strcmp(sConVarModes, ""))
 	{
-		if (StrContains(sGameMode, sModeName[iMode], false) != -1 && sModeName[iMode][0] != '\0')
+		Format(sConVarModes, sizeof(sConVarModes), ",%s,", sConVarModes);
+		if (StrContains(sConVarModes, sGameMode, false) == -1)
 		{
-			return true;
+			return false;
 		}
 	}
 	g_cvGDBDisabledGameModes.GetString(sConVarModes, sizeof(sConVarModes));
-	ExplodeString(sConVarModes, ",", sModeName, sizeof(sModeName), sizeof(sModeName[]));
-	for (int iMode = 0; iMode < sizeof(sModeName); iMode++)
+	if (strcmp(sConVarModes, ""))
 	{
-		if (StrContains(sGameMode, sModeName[iMode], false) == -1 && sModeName[iMode][0] != '\0')
+		Format(sConVarModes, sizeof(sConVarModes), ",%s,", sConVarModes);
+		if (StrContains(sConVarModes, sGameMode, false) != -1)
 		{
-			return true;
+			return false;
 		}
 	}
-	return false;
+	return true;
 }
