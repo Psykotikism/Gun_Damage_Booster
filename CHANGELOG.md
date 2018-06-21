@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 5.5 (June 21, 2018)
+
+1. Changes:
+
+- Optimized code a bit.
+
 ## Version 5.0 (June 18, 2018)
 
 1. Bug fixes:

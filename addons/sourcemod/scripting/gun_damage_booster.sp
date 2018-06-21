@@ -3,7 +3,7 @@
 #include <sdktools>
 #pragma semicolon 1
 #pragma newdecls required
-#define GDB_VERSION "5.0"
+#define GDB_VERSION "5.5"
 
 public Plugin myinfo =
 {
@@ -39,10 +39,10 @@ ConVar g_cvGDBTactical;
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
 {
-	char sGameName[64];
-	GetGameFolderName(sGameName, sizeof(sGameName));
-	if (!StrEqual(sGameName, "left4dead", false) && !StrEqual(sGameName, "left4dead2", false))
+	EngineVersion evEngine = GetEngineVersion();
+	if (evEngine != Engine_Left4Dead && evEngine != Engine_Left4Dead2)
 	{
+		strcopy(error, err_max, "Gun Damage Booster only supports Left 4 Dead 1 & 2.");
 		return APLRes_SilentFailure;
 	}
 	return APLRes_Success;
@@ -90,218 +90,92 @@ public Action eEventPlayerHurt(Event event, const char[] name, bool dontBroadcas
 			if (StrEqual(sWeapon, "rifle_ak47", false))
 			{
 				int iDamage = g_cvGDBAK47.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "sniper_awp", false))
 			{
 				int iDamage = g_cvGDBAWP.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "shotgun_chrome", false))
 			{
 				int iDamage = g_cvGDBChrome.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "hunting_rifle", false))
 			{
 				int iDamage = g_cvGDBHunting.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "rifle", false))
 			{
 				int iDamage = g_cvGDBM16.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "rifle_m60", false))
 			{
 				int iDamage = g_cvGDBM60.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "pistol_magnum", false))
 			{
 				int iDamage = g_cvGDBMagnum.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "sniper_military", false))
 			{
 				int iDamage = g_cvGDBMilitary.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "smg_mp5", false))
 			{
 				int iDamage = g_cvGDBMP5.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "pistol", false))
 			{
 				int iDamage = g_cvGDBPistol.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "pumpshotgun", false))
 			{
 				int iDamage = g_cvGDBPump.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "rifle_desert", false))
 			{
 				int iDamage = g_cvGDBSCAR.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "sniper_scout", false))
 			{
 				int iDamage = g_cvGDBScout.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "rifle_sg552", false))
 			{
 				int iDamage = g_cvGDBSG552.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "smg_silenced", false))
 			{
 				int iDamage = g_cvGDBSilenced.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "smg", false))
 			{
 				int iDamage = g_cvGDBSMG.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "shotgun_spas", false))
 			{
 				int iDamage = g_cvGDBSPAS.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 			else if (StrEqual(sWeapon, "autoshotgun", false))
 			{
 				int iDamage = g_cvGDBTactical.IntValue;
-				if (iHealth - iDamage < 0)
-				{
-					ForcePlayerSuicide(iTarget);
-				}
-				else
-				{
-					SetEntityHealth(iTarget, iHealth - iDamage);
-				}
+				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
 			}
 		}
 	}
