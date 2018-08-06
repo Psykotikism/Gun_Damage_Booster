@@ -1,9 +1,9 @@
 // Gun Damage Booster
-#include <sourcemod>
-#include <sdktools>
 #pragma semicolon 1
 #pragma newdecls required
-#define GDB_VERSION "5.5"
+#include <sourcemod>
+#include <sdkhooks>
+#define GDB_VERSION "6.0"
 
 public Plugin myinfo =
 {
@@ -14,28 +14,8 @@ public Plugin myinfo =
 	url = "https://forums.alliedmods.net/showthread.php?t=301641"
 };
 
-ConVar g_cvGDBAK47;
-ConVar g_cvGDBAWP;
-ConVar g_cvGDBChrome;
-ConVar g_cvGDBDisabledGameModes;
-ConVar g_cvGDBEnable;
-ConVar g_cvGDBEnabledGameModes;
-ConVar g_cvGDBGameMode;
-ConVar g_cvGDBHunting;
-ConVar g_cvGDBM16;
-ConVar g_cvGDBM60;
-ConVar g_cvGDBMagnum;
-ConVar g_cvGDBMilitary;
-ConVar g_cvGDBMP5;
-ConVar g_cvGDBPistol;
-ConVar g_cvGDBPump;
-ConVar g_cvGDBSCAR;
-ConVar g_cvGDBScout;
-ConVar g_cvGDBSG552;
-ConVar g_cvGDBSilenced;
-ConVar g_cvGDBSMG;
-ConVar g_cvGDBSPAS;
-ConVar g_cvGDBTactical;
+bool g_bLateLoad;
+ConVar g_cvGDBConVars[22];
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
 {
@@ -45,159 +25,174 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 		strcopy(error, err_max, "Gun Damage Booster only supports Left 4 Dead 1 & 2.");
 		return APLRes_SilentFailure;
 	}
+	g_bLateLoad = late;
 	return APLRes_Success;
 }
 
 public void OnPluginStart()
 {
-	g_cvGDBAK47 = CreateConVar("gdb_ak47", "40", "Damage boost for the AK47 Assault Rifle.", _, true, 0.0, true, 99999.0);
-	g_cvGDBAWP = CreateConVar("gdb_awp", "50", "Damage boost for the AWP Sniper Rifle.", _, true, 0.0, true, 99999.0);
-	g_cvGDBChrome = CreateConVar("gdb_chrome", "20", "Damage boost for the Chrome Shotgun.", _, true, 0.0, true, 99999.0);
-	g_cvGDBDisabledGameModes = CreateConVar("gdb_disabledgamemodes", "", "Disable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\n(Empty: None)\n(Not empty: Disabled in these game modes.)", _, true, 0.0, true, 99999.0);
-	g_cvGDBEnable = CreateConVar("gdb_enable", "1", "Enable the Gun Damage Booster?\n(0: OFF)\n(1: ON)", _, true, 0.0, true, 99999.0);
-	g_cvGDBEnabledGameModes = CreateConVar("gdb_enabledgamemodes", "", "Enable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\n(Empty: None)\n(Not empty: Enabled in these game modes.)", _, true, 0.0, true, 99999.0);
-	g_cvGDBGameMode = FindConVar("mp_gamemode");
-	g_cvGDBHunting = CreateConVar("gdb_hunting", "45", "Damage boost for the Hunting Rifle.", _, true, 0.0, true, 99999.0);
-	g_cvGDBM16 = CreateConVar("gdb_m16", "40", "Damage boost for the M16 Assault Rifle.", _, true, 0.0, true, 99999.0);
-	g_cvGDBM60 = CreateConVar("gdb_m60", "45", "Damage boost for the M60 Assault Rifle.", _, true, 0.0, true, 99999.0);
-	g_cvGDBMagnum = CreateConVar("gdb_magnum", "25", "Damage boost for the Magnum Pistol.", _, true, 0.0, true, 99999.0);
-	g_cvGDBMilitary = CreateConVar("gdb_military", "50", "Damage boost for the Military Sniper Rifle.", _, true, 0.0, true, 99999.0);
-	g_cvGDBMP5 = CreateConVar("gdb_mp5", "30", "Damage boost for the MP5 SMG.", _, true, 0.0, true, 99999.0);
-	g_cvGDBPistol = CreateConVar("gdb_pistol", "20", "Damage boost for the M1911/P220 Pistol.", _, true, 0.0, true, 99999.0);
-	g_cvGDBPump = CreateConVar("gdb_pump", "20", "Damage boost for the Pump Shotgunn.", _, true, 0.0, true, 99999.0);
-	g_cvGDBSCAR = CreateConVar("gdb_scar", "40", "Damage boost for the SCAR-L Desert Rifle.", _, true, 0.0, true, 99999.0);
-	g_cvGDBScout = CreateConVar("gdb_scout", "50", "Damage boost for the Scout Sniper Rifle.", _, true, 0.0, true, 99999.0);
-	g_cvGDBSG552 = CreateConVar("gdb_sg552", "40", "Damage boost for the SG552 Assault Rifle.", _, true, 0.0, true, 99999.0);
-	g_cvGDBSilenced = CreateConVar("gdb_silenced", "35", "Damage boost for the Silenced SMG.", _, true, 0.0, true, 99999.0);
-	g_cvGDBSMG = CreateConVar("gdb_smg", "30", "Damage boost for the SMG.", _, true, 0.0, true, 99999.0);
-	g_cvGDBSPAS = CreateConVar("gdb_spas", "25", "Damage boost for the SPAS Shotgun.", _, true, 0.0, true, 99999.0);
-	g_cvGDBTactical = CreateConVar("gdb_tactical", "25", "Damage boost for the Tactical Shotgun.", _, true, 0.0, true, 99999.0);
-	HookEvent("player_hurt", eEventPlayerHurt);
+	g_cvGDBConVars[0] = CreateConVar("gdb_ak47", "40.0", "Damage boost for the AK47 Assault Rifle.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[1] = CreateConVar("gdb_awp", "50.0", "Damage boost for the AWP Sniper Rifle.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[2] = CreateConVar("gdb_chrome", "20.0", "Damage boost for the Chrome Shotgun.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[3] = CreateConVar("gdb_disabledgamemodes", "", "Disable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\n(Empty: None)\n(Not empty: Disabled in these game modes.)", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[4] = CreateConVar("gdb_enable", "1", "Enable the Gun Damage Booster?\n(0: OFF)\n(1: ON)", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[5] = CreateConVar("gdb_enabledgamemodes", "", "Enable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\n(Empty: None)\n(Not empty: Enabled in these game modes.)", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[6] = FindConVar("mp_gamemode");
+	g_cvGDBConVars[7] = CreateConVar("gdb_hunting", "45.0", "Damage boost for the Hunting Rifle.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[8] = CreateConVar("gdb_m16", "40.0", "Damage boost for the M16 Assault Rifle.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[9] = CreateConVar("gdb_m60", "45.0", "Damage boost for the M60 Assault Rifle.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[10] = CreateConVar("gdb_magnum", "25.0", "Damage boost for the Magnum Pistol.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[11] = CreateConVar("gdb_military", "50.0", "Damage boost for the Military Sniper Rifle.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[12] = CreateConVar("gdb_mp5", "30.0", "Damage boost for the MP5 SMG.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[13] = CreateConVar("gdb_pistol", "20.0", "Damage boost for the M1911/P220 Pistol.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[14] = CreateConVar("gdb_pump", "20.0", "Damage boost for the Pump Shotgunn.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[15] = CreateConVar("gdb_scar", "40.0", "Damage boost for the SCAR-L Desert Rifle.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[16] = CreateConVar("gdb_scout", "50.0", "Damage boost for the Scout Sniper Rifle.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[17] = CreateConVar("gdb_sg552", "40.0", "Damage boost for the SG552 Assault Rifle.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[18] = CreateConVar("gdb_silenced", "35.0", "Damage boost for the Silenced SMG.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[19] = CreateConVar("gdb_smg", "30.0", "Damage boost for the SMG.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[20] = CreateConVar("gdb_spas", "25.0", "Damage boost for the SPAS Shotgun.", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[21] = CreateConVar("gdb_tactical", "25.0", "Damage boost for the Tactical Shotgun.", _, true, 0.0, true, 99999.0);
+	CreateConVar("gdb_version", GDB_VERSION, "Gun Damage Booster Version", FCVAR_DONTRECORD|FCVAR_NOTIFY);
 	AutoExecConfig(true, "gun_damage_booster");
 }
 
-public Action eEventPlayerHurt(Event event, const char[] name, bool dontBroadcast)
+public void OnMapStart()
 {
-	int iShooter = GetClientOfUserId(event.GetInt("attacker"));
-	int iTarget = GetClientOfUserId(event.GetInt("userid"));
-	if (g_cvGDBEnable.BoolValue && bIsSystemValid())
+	if (g_bLateLoad)
 	{
-		if (bIsSurvivor(iShooter) && bIsInfected(iTarget))
+		vLateLoad(true);
+		g_bLateLoad = false;
+	}
+}
+
+public void OnClientPostAdminCheck(int client)
+{
+	SDKHook(client, SDKHook_OnTakeDamage, OnTakeDamage);
+}
+
+public void OnClientDisconnect(int client)
+{
+	SDKHook(client, SDKHook_OnTakeDamage, OnTakeDamage);
+}
+
+void vLateLoad(bool late)
+{
+	if (late)
+	{
+		for (int iPlayer = 1; iPlayer <= MaxClients; iPlayer++)
 		{
-			char sWeapon[32];
-			event.GetString("weapon", sWeapon, sizeof(sWeapon));
-			int iHealth = GetClientHealth(iTarget);
-			if (StrEqual(sWeapon, "rifle_ak47", false))
+			if (bIsValidClient(iPlayer))
 			{
-				int iDamage = g_cvGDBAK47.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "sniper_awp", false))
-			{
-				int iDamage = g_cvGDBAWP.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "shotgun_chrome", false))
-			{
-				int iDamage = g_cvGDBChrome.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "hunting_rifle", false))
-			{
-				int iDamage = g_cvGDBHunting.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "rifle", false))
-			{
-				int iDamage = g_cvGDBM16.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "rifle_m60", false))
-			{
-				int iDamage = g_cvGDBM60.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "pistol_magnum", false))
-			{
-				int iDamage = g_cvGDBMagnum.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "sniper_military", false))
-			{
-				int iDamage = g_cvGDBMilitary.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "smg_mp5", false))
-			{
-				int iDamage = g_cvGDBMP5.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "pistol", false))
-			{
-				int iDamage = g_cvGDBPistol.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "pumpshotgun", false))
-			{
-				int iDamage = g_cvGDBPump.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "rifle_desert", false))
-			{
-				int iDamage = g_cvGDBSCAR.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "sniper_scout", false))
-			{
-				int iDamage = g_cvGDBScout.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "rifle_sg552", false))
-			{
-				int iDamage = g_cvGDBSG552.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "smg_silenced", false))
-			{
-				int iDamage = g_cvGDBSilenced.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "smg", false))
-			{
-				int iDamage = g_cvGDBSMG.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "shotgun_spas", false))
-			{
-				int iDamage = g_cvGDBSPAS.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
-			}
-			else if (StrEqual(sWeapon, "autoshotgun", false))
-			{
-				int iDamage = g_cvGDBTactical.IntValue;
-				(iHealth - iDamage <= 0) ? SetEntityHealth(iTarget, 1) : SetEntityHealth(iTarget, iHealth - iDamage);
+				SDKHook(iPlayer, SDKHook_OnTakeDamage, OnTakeDamage);
 			}
 		}
 	}
 }
 
+public Action OnTakeDamage(int victim, int &attacker, int &inflictor, float &damage, int &damagetype)
+{
+	if (g_cvGDBConVars[4].BoolValue && bIsPluginEnabled() && damage > 0.0)
+	{
+		if (bIsSurvivor(attacker) && bIsInfected(victim) && damagetype & DMG_BULLET)
+		{
+			char sWeapon[128];
+			GetClientWeapon(attacker, sWeapon, sizeof(sWeapon));
+			if (strcmp(sWeapon, "weapon_rifle_ak47", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[0].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_sniper_awp", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[1].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_shotgun_chrome", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[2].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_hunting_rifle", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[7].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_rifle", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[8].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_rifle_m60", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[9].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_pistol_magnum", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[10].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_sniper_military", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[11].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_smg_mp5", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[12].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_pistol", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[13].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_pumpshotgun", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[14].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_rifle_desert", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[15].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_sniper_scout", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[16].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_rifle_sg552", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[17].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_smg_silenced", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[18].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_smg", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[19].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_shotgun_spas", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[20].FloatValue;
+			}
+			else if (strcmp(sWeapon, "weapon_autoshotgun", false) == 0)
+			{
+				damage = damage + g_cvGDBConVars[21].FloatValue;
+			}
+			return Plugin_Changed;
+		}
+	}
+	return Plugin_Continue;
+}
+
 stock bool bIsInfected(int client)
 {
-	return client > 0 && client <= MaxClients && IsClientInGame(client) && GetClientTeam(client) == 3 && IsPlayerAlive(client) && !IsClientInKickQueue(client);
+	return bIsValidClient(client) && GetClientTeam(client) == 3 && IsPlayerAlive(client);
 }
 
 stock bool bIsSurvivor(int client)
 {
-	return client > 0 && client <= MaxClients && IsClientInGame(client) && GetClientTeam(client) == 2 && IsPlayerAlive(client) && !IsClientInKickQueue(client);
+	return bIsValidClient(client) && GetClientTeam(client) == 2 && IsPlayerAlive(client);
 }
 
-stock bool bIsSystemValid()
+stock bool bIsPluginEnabled()
 {
 	char sGameMode[32];
 	char sConVarModes[32];
-	g_cvGDBGameMode.GetString(sGameMode, sizeof(sGameMode));
+	g_cvGDBConVars[6].GetString(sGameMode, sizeof(sGameMode));
 	Format(sGameMode, sizeof(sGameMode), ",%s,", sGameMode);
-	g_cvGDBEnabledGameModes.GetString(sConVarModes, sizeof(sConVarModes));
+	g_cvGDBConVars[5].GetString(sConVarModes, sizeof(sConVarModes));
 	if (strcmp(sConVarModes, ""))
 	{
 		Format(sConVarModes, sizeof(sConVarModes), ",%s,", sConVarModes);
@@ -206,7 +201,7 @@ stock bool bIsSystemValid()
 			return false;
 		}
 	}
-	g_cvGDBDisabledGameModes.GetString(sConVarModes, sizeof(sConVarModes));
+	g_cvGDBConVars[3].GetString(sConVarModes, sizeof(sConVarModes));
 	if (strcmp(sConVarModes, ""))
 	{
 		Format(sConVarModes, sizeof(sConVarModes), ",%s,", sConVarModes);
@@ -216,4 +211,9 @@ stock bool bIsSystemValid()
 		}
 	}
 	return true;
+}
+
+stock bool bIsValidClient(int client)
+{
+	return client > 0 && client <= MaxClients && IsClientInGame(client) && !IsClientInKickQueue(client);
 }

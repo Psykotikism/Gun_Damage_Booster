@@ -3,13 +3,13 @@ I liked the idea of boosting the damage of each gun, so I decided to make this.
 
 ## License
 Gun Damage Booster: a L4D/L4D2 SourceMod Plugin
-Copyright (C) 2017  Alfred "Crasher_3637/Psyk0tik" Llagas
+Copyright (C) 2017 Alfred "Crasher_3637/Psyk0tik" Llagas
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 ## About
 Increases each gun's damage.
@@ -49,21 +49,21 @@ Gun Damage Booster was developed against SourceMod 1.8+.
 // Default: "40"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_ak47 "40"
+gdb_ak47 "40.0"
 
 // Damage boost for the AWP Sniper Rifle.
 // -
 // Default: "50"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_awp "50"
+gdb_awp "50.0"
 
 // Damage boost for the Chrome Shotgun.
 // -
 // Default: "20"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_chrome "20"
+gdb_chrome "20.0"
 
 // Disable the Gun Damage Booster in these game modes.
 // Game mode limit: 64
@@ -101,105 +101,105 @@ gdb_enabledgamemodes ""
 // Default: "45"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_hunting "45"
+gdb_hunting "45.0"
 
 // Damage boost for the M16 Assault Rifle.
 // -
 // Default: "40"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_m16 "40"
+gdb_m16 "40.0"
 
 // Damage boost for the M60 Assault Rifle.
 // -
 // Default: "45"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_m60 "45"
+gdb_m60 "45.0"
 
 // Damage boost for the Magnum Pistol.
 // -
 // Default: "25"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_magnum "25"
+gdb_magnum "25.0"
 
 // Damage boost for the Military Sniper Rifle.
 // -
 // Default: "50"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_military "50"
+gdb_military "50.0"
 
 // Damage boost for the MP5 SMG.
 // -
 // Default: "30"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_mp5 "30"
+gdb_mp5 "30.0"
 
 // Damage boost for the M1911/P220 Pistol.
 // -
 // Default: "20"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_pistol "20"
+gdb_pistol "20.0"
 
 // Damage boost for the Pump Shotgunn.
 // -
 // Default: "20"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_pump "20"
+gdb_pump "20.0"
 
 // Damage boost for the SCAR-L Desert Rifle.
 // -
 // Default: "40"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_scar "40"
+gdb_scar "40.0"
 
 // Damage boost for the Scout Sniper Rifle.
 // -
 // Default: "50"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_scout "50"
+gdb_scout "50.0"
 
 // Damage boost for the SG552 Assault Rifle.
 // -
 // Default: "40"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_sg552 "40"
+gdb_sg552 "40.0"
 
 // Damage boost for the Silenced SMG.
 // -
 // Default: "35"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_silenced "35"
+gdb_silenced "35.0"
 
 // Damage boost for the SMG.
 // -
 // Default: "30"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_smg "30"
+gdb_smg "30.0"
 
 // Damage boost for the SPAS Shotgun.
 // -
 // Default: "25"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_spas "25"
+gdb_spas "25.0"
 
 // Damage boost for the Tactical Shotgun.
 // -
 // Default: "25"
 // Minimum: "0.000000"
 // Maximum: "99999.000000"
-gdb_tactical "25"
+gdb_tactical "25.0"
 ```
 
 ## Questions You May Have
@@ -234,12 +234,13 @@ Outcome: The plugin works only in Versus mode.
 ```
 
 ## Credits
-Crimson_Fox - For the [Weapon Unlock](https://forums.alliedmods.net/showthread.php?t=114296) plugin.
+**Crimson_Fox** - For the [Weapon Unlock](https://forums.alliedmods.net/showthread.php?t=114296) plugin.
 
 # Contact Me
 If you wish to contact me for any questions, concerns, suggestions, or criticism, I can be found here:
 - [AlliedModders Forum](https://forums.alliedmods.net/member.php?u=181166)
 - [Steam](https://steamcommunity.com/profiles/76561198056665335)
+- Psyk0tik#7757 on Discord
 
 # 3rd-Party Revisions Notice
 If you would like to share your own revisions of this plugin, please rename the files! I do not want to create confusion for end-users and it will avoid conflict and negative feedback on the official versions of my work. If you choose to keep the same file names for your revisions, it will cause users to assume that the official versions are the source of any problems your revisions may have. This is to protect you (the reviser) and me (the developer)! Thank you!

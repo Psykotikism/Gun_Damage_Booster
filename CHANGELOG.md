@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 6.0 (August 6, 2018)
+
+1. Changes:
+
+- The code now uses OnTakeDamage instead of player_hurt.
+- Added support for late loads.
+
 ## Version 5.5 (June 21, 2018)
 
 1. Changes:
