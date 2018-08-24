@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 6.5 (August 23, 2018)
+
+1. Changes:
+
+- Removed the OnClientDisconnect() portion of the code.
+- Removed the bIsInfected() check so the damage boost applies towards friendly-fire as well.
+
 ## Version 6.0 (August 6, 2018)
 
 1. Changes:

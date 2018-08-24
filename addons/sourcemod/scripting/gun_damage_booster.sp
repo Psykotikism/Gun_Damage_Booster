@@ -1,9 +1,9 @@
 // Gun Damage Booster
-#pragma semicolon 1
-#pragma newdecls required
 #include <sourcemod>
 #include <sdkhooks>
-#define GDB_VERSION "6.0"
+#pragma semicolon 1
+#pragma newdecls required
+#define GDB_VERSION "6.5"
 
 public Plugin myinfo =
 {
@@ -34,9 +34,9 @@ public void OnPluginStart()
 	g_cvGDBConVars[0] = CreateConVar("gdb_ak47", "40.0", "Damage boost for the AK47 Assault Rifle.", _, true, 0.0, true, 99999.0);
 	g_cvGDBConVars[1] = CreateConVar("gdb_awp", "50.0", "Damage boost for the AWP Sniper Rifle.", _, true, 0.0, true, 99999.0);
 	g_cvGDBConVars[2] = CreateConVar("gdb_chrome", "20.0", "Damage boost for the Chrome Shotgun.", _, true, 0.0, true, 99999.0);
-	g_cvGDBConVars[3] = CreateConVar("gdb_disabledgamemodes", "", "Disable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\n(Empty: None)\n(Not empty: Disabled in these game modes.)", _, true, 0.0, true, 99999.0);
-	g_cvGDBConVars[4] = CreateConVar("gdb_enable", "1", "Enable the Gun Damage Booster?\n(0: OFF)\n(1: ON)", _, true, 0.0, true, 99999.0);
-	g_cvGDBConVars[5] = CreateConVar("gdb_enabledgamemodes", "", "Enable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\n(Empty: None)\n(Not empty: Enabled in these game modes.)", _, true, 0.0, true, 99999.0);
+	g_cvGDBConVars[3] = CreateConVar("gdb_disabledgamemodes", "", "Disable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\n(Empty: None)\n(Not empty: Disabled in these game modes.)");
+	g_cvGDBConVars[4] = CreateConVar("gdb_enable", "1", "Enable the Gun Damage Booster?\n(0: OFF)\n(1: ON)", _, true, 0.0, true, 1.0);
+	g_cvGDBConVars[5] = CreateConVar("gdb_enabledgamemodes", "", "Enable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\n(Empty: None)\n(Not empty: Enabled in these game modes.)");
 	g_cvGDBConVars[6] = FindConVar("mp_gamemode");
 	g_cvGDBConVars[7] = CreateConVar("gdb_hunting", "45.0", "Damage boost for the Hunting Rifle.", _, true, 0.0, true, 99999.0);
 	g_cvGDBConVars[8] = CreateConVar("gdb_m16", "40.0", "Damage boost for the M16 Assault Rifle.", _, true, 0.0, true, 99999.0);
@@ -53,7 +53,7 @@ public void OnPluginStart()
 	g_cvGDBConVars[19] = CreateConVar("gdb_smg", "30.0", "Damage boost for the SMG.", _, true, 0.0, true, 99999.0);
 	g_cvGDBConVars[20] = CreateConVar("gdb_spas", "25.0", "Damage boost for the SPAS Shotgun.", _, true, 0.0, true, 99999.0);
 	g_cvGDBConVars[21] = CreateConVar("gdb_tactical", "25.0", "Damage boost for the Tactical Shotgun.", _, true, 0.0, true, 99999.0);
-	CreateConVar("gdb_version", GDB_VERSION, "Gun Damage Booster Version", FCVAR_DONTRECORD|FCVAR_NOTIFY);
+	CreateConVar("gdb_version", GDB_VERSION, "Gun Damage Booster Version", FCVAR_NOTIFY|FCVAR_DONTRECORD);
 	AutoExecConfig(true, "gun_damage_booster");
 }
 
@@ -67,11 +67,6 @@ public void OnMapStart()
 }
 
 public void OnClientPostAdminCheck(int client)
-{
-	SDKHook(client, SDKHook_OnTakeDamage, OnTakeDamage);
-}
-
-public void OnClientDisconnect(int client)
 {
 	SDKHook(client, SDKHook_OnTakeDamage, OnTakeDamage);
 }
@@ -94,7 +89,7 @@ public Action OnTakeDamage(int victim, int &attacker, int &inflictor, float &dam
 {
 	if (g_cvGDBConVars[4].BoolValue && bIsPluginEnabled() && damage > 0.0)
 	{
-		if (bIsSurvivor(attacker) && bIsInfected(victim) && damagetype & DMG_BULLET)
+		if (bIsSurvivor(attacker) && bIsValidClient(victim) && damagetype & DMG_BULLET)
 		{
 			char sWeapon[128];
 			GetClientWeapon(attacker, sWeapon, sizeof(sWeapon));
@@ -174,11 +169,6 @@ public Action OnTakeDamage(int victim, int &attacker, int &inflictor, float &dam
 		}
 	}
 	return Plugin_Continue;
-}
-
-stock bool bIsInfected(int client)
-{
-	return bIsValidClient(client) && GetClientTeam(client) == 3 && IsPlayerAlive(client);
 }
 
 stock bool bIsSurvivor(int client)

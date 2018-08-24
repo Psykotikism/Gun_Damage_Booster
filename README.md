@@ -72,8 +72,6 @@ gdb_chrome "20.0"
 // (Not empty: Disabled in these game modes.)
 // -
 // Default: ""
-// Minimum: "0.000000"
-// Maximum: "99999.000000"
 gdb_disabledgamemodes ""
 
 // Enable the Gun Damage Booster?
@@ -82,7 +80,7 @@ gdb_disabledgamemodes ""
 // -
 // Default: "1"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "1.000000"
 gdb_enable "1"
 
 // Enable the Gun Damage Booster in these game modes.
@@ -92,8 +90,6 @@ gdb_enable "1"
 // (Not empty: Enabled in these game modes.)
 // -
 // Default: ""
-// Minimum: "0.000000"
-// Maximum: "99999.000000"
 gdb_enabledgamemodes ""
 
 // Damage boost for the Hunting Rifle.
