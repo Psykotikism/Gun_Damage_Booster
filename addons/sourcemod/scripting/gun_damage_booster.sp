@@ -49,8 +49,6 @@ int g_iCurrentMode;
 
 public void OnPluginStart()
 {
-	g_cvGDBConVars[0] = CreateConVar("gdb_ak47", "40.0", "Damage boost for the AK47 Assault Rifle.", _, true, 0.0, true, 999999.0);
-	g_cvGDBConVars[2] = CreateConVar("gdb_chrome", "20.0", "Damage boost for the Chrome Shotgun.", _, true, 0.0, true, 999999.0);
 	g_cvGDBConVars[3] = CreateConVar("gdb_disabledgamemodes", "", "Disable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\nEmpty: None\nNot empty: Disabled in these game modes.");
 	g_cvGDBConVars[4] = CreateConVar("gdb_enable", "1", "Enable the Gun Damage Booster?\n0: OFF\n1: ON", _, true, 0.0, true, 1.0);
 	g_cvGDBConVars[5] = CreateConVar("gdb_enabledgamemodes", "", "Enable the Gun Damage Booster in these game modes.\nGame mode limit: 64\nCharacter limit for each game mode: 32\nEmpty: None\nNot empty: Enabled in these game modes.");
@@ -58,23 +56,25 @@ public void OnPluginStart()
 	g_cvGDBConVars[7] = FindConVar("mp_gamemode");
 	g_cvGDBConVars[8] = CreateConVar("gdb_hunting", "45.0", "Damage boost for the Hunting Rifle.", _, true, 0.0, true, 999999.0);
 	g_cvGDBConVars[9] = CreateConVar("gdb_m16", "40.0", "Damage boost for the M16 Assault Rifle.", _, true, 0.0, true, 999999.0);
-	g_cvGDBConVars[10] = CreateConVar("gdb_m60", "45.0", "Damage boost for the M60 Assault Rifle.", _, true, 0.0, true, 999999.0);
-	g_cvGDBConVars[11] = CreateConVar("gdb_magnum", "25.0", "Damage boost for the Magnum Pistol.", _, true, 0.0, true, 999999.0);
-	g_cvGDBConVars[12] = CreateConVar("gdb_military", "50.0", "Damage boost for the Military Sniper Rifle.", _, true, 0.0, true, 999999.0);
 	g_cvGDBConVars[14] = CreateConVar("gdb_pistol", "20.0", "Damage boost for the M1911/P220 Pistol.", _, true, 0.0, true, 999999.0);
 	g_cvGDBConVars[15] = CreateConVar("gdb_pump", "20.0", "Damage boost for the Pump Shotgunn.", _, true, 0.0, true, 999999.0);
-	g_cvGDBConVars[16] = CreateConVar("gdb_scar", "40.0", "Damage boost for the SCAR-L Desert Rifle.", _, true, 0.0, true, 999999.0);
-	g_cvGDBConVars[19] = CreateConVar("gdb_silenced", "35.0", "Damage boost for the Silenced SMG.", _, true, 0.0, true, 999999.0);
 	g_cvGDBConVars[20] = CreateConVar("gdb_smg", "30.0", "Damage boost for the SMG.", _, true, 0.0, true, 999999.0);
-	g_cvGDBConVars[21] = CreateConVar("gdb_spas", "25.0", "Damage boost for the SPAS Shotgun.", _, true, 0.0, true, 999999.0);
 	g_cvGDBConVars[22] = CreateConVar("gdb_tactical", "25.0", "Damage boost for the Tactical Shotgun.", _, true, 0.0, true, 999999.0);
 
 	if (g_bLeft4Dead2)
 	{
+		g_cvGDBConVars[0] = CreateConVar("gdb_ak47", "40.0", "Damage boost for the AK47 Assault Rifle.", _, true, 0.0, true, 999999.0);
 		g_cvGDBConVars[1] = CreateConVar("gdb_awp", "50.0", "Damage boost for the AWP Sniper Rifle.", _, true, 0.0, true, 999999.0);
+		g_cvGDBConVars[2] = CreateConVar("gdb_chrome", "20.0", "Damage boost for the Chrome Shotgun.", _, true, 0.0, true, 999999.0);
+		g_cvGDBConVars[10] = CreateConVar("gdb_m60", "45.0", "Damage boost for the M60 Assault Rifle.", _, true, 0.0, true, 999999.0);
+		g_cvGDBConVars[11] = CreateConVar("gdb_magnum", "25.0", "Damage boost for the Magnum Pistol.", _, true, 0.0, true, 999999.0);
+		g_cvGDBConVars[12] = CreateConVar("gdb_military", "50.0", "Damage boost for the Military Sniper Rifle.", _, true, 0.0, true, 999999.0);
 		g_cvGDBConVars[13] = CreateConVar("gdb_mp5", "30.0", "Damage boost for the MP5 SMG.", _, true, 0.0, true, 999999.0);
+		g_cvGDBConVars[16] = CreateConVar("gdb_scar", "40.0", "Damage boost for the SCAR-L Desert Rifle.", _, true, 0.0, true, 999999.0);
 		g_cvGDBConVars[17] = CreateConVar("gdb_scout", "50.0", "Damage boost for the Scout Sniper Rifle.", _, true, 0.0, true, 999999.0);
 		g_cvGDBConVars[18] = CreateConVar("gdb_sg552", "40.0", "Damage boost for the SG552 Assault Rifle.", _, true, 0.0, true, 999999.0);
+		g_cvGDBConVars[19] = CreateConVar("gdb_silenced", "35.0", "Damage boost for the Silenced SMG.", _, true, 0.0, true, 999999.0);
+		g_cvGDBConVars[21] = CreateConVar("gdb_spas", "25.0", "Damage boost for the SPAS Shotgun.", _, true, 0.0, true, 999999.0);
 	}
 
 	CreateConVar("gdb_version", GDB_VERSION, "Gun Damage Booster Version", FCVAR_NOTIFY|FCVAR_DONTRECORD);
