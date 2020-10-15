@@ -4,6 +4,8 @@
 
 1. Changes:
 
+- Damage boosts are no longer applied against teammates.
+- Damage boosts are now applied to all entities, not just players.
 - Added the `gdb_gamemodetypes` convar. (Thanks to Silvers for the code!)
 
 ## Version 6.5 (August 23, 2018)
