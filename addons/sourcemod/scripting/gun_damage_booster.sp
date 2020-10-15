@@ -102,8 +102,13 @@ public Action OnTakeDamage(int victim, int &attacker, int &inflictor, float &dam
 {
 	if (g_cvGDBConVars[4].BoolValue && bIsPluginEnabled() && damage > 0.0)
 	{
-		if (bIsSurvivor(attacker) && bIsValidClient(victim) && GetClientTeam(attacker) != GetClientTeam(victim) && damagetype & DMG_BULLET)
+		if (bIsSurvivor(attacker) && damagetype & DMG_BULLET)
 		{
+			if (bIsValidClient(victim) && GetClientTeam(attacker) == GetClientTeam(victim))
+			{
+				return Plugin_Continue;
+			}
+
 			char sWeapon[128];
 			GetClientWeapon(attacker, sWeapon, sizeof(sWeapon));
 			if (StrEqual(sWeapon, "weapon_rifle_ak47", false))
