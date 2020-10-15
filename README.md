@@ -18,7 +18,7 @@ Increases each gun's damage.
 The plugin boosts the damage. Nothing more, nothing less.
 
 ### Requirements
-Gun Damage Booster was developed against SourceMod 1.8+.
+SourceMod 1.8.X or higher
 
 ### Installation
 1. Delete files from old versions of the plugin.
@@ -26,57 +26,57 @@ Gun Damage Booster was developed against SourceMod 1.8+.
 3. Place all the contents into their respective folders.
 4. If prompted to replace or merge anything, click yes.
 5. Load up Gun Damage Booster.
-  - Type ```sm_rcon sm plugins load gun_damage_booster``` in console.
+  - Type `sm_rcon sm plugins load gun_damage_booster` in console.
   - OR restart the server.
 6. Customize Gun Damage Booster (Config file generated on first load).
 
 ### Uninstalling/Upgrading to Newer Versions
-1. Delete gun_damage_booster.smx from addons/sourcemod/plugins folder.
-2. Delete gun_damage_booster.sp from addons/sourcemod/scripting folder.
-3. Delete gun_damage_booster.cfg from cfg/sourcemod folder.
+1. Delete `gun_damage_booster.smx` from `addons/sourcemod/plugins` folder.
+2. Delete `gun_damage_booster.sp` from `addons/sourcemod/scripting` folder.
+3. Delete `gun_damage_booster.cfg` from `cfg/sourcemod` folder.
 4. Follow the Installation guide above. (Only for upgrading to newer versions.)
 
 ### Disabling
-1. Move gun_damage_booster.smx to plugins/disabled folder.
+1. Move `gun_damage_booster.smx` to `plugins/disabled` folder.
 2. Unload Gun Damage Booster.
-  - Type ```sm_rcon sm plugins unload gun_damage_booster``` in console.
+  - Type `sm_rcon sm plugins unload gun_damage_booster` in console.
   - OR restart the server.
 
 ## Configuration Variables (ConVars/CVars)
 ```
 // Damage boost for the AK47 Assault Rifle.
 // -
-// Default: "40"
+// Default: "40.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_ak47 "40.0"
 
 // Damage boost for the AWP Sniper Rifle.
 // -
-// Default: "50"
+// Default: "50.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_awp "50.0"
 
 // Damage boost for the Chrome Shotgun.
 // -
-// Default: "20"
+// Default: "20.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_chrome "20.0"
 
 // Disable the Gun Damage Booster in these game modes.
 // Game mode limit: 64
 // Character limit for each game mode: 32
-// (Empty: None)
-// (Not empty: Disabled in these game modes.)
+// Empty: None
+// Not empty: Disabled in these game modes.
 // -
 // Default: ""
 gdb_disabledgamemodes ""
 
 // Enable the Gun Damage Booster?
-// (0: OFF)
-// (1: ON)
+// 0: OFF
+// 1: ON
 // -
 // Default: "1"
 // Minimum: "0.000000"
@@ -86,115 +86,127 @@ gdb_enable "1"
 // Enable the Gun Damage Booster in these game modes.
 // Game mode limit: 64
 // Character limit for each game mode: 32
-// (Empty: None)
-// (Not empty: Enabled in these game modes.)
+// Empty: None
+// Not empty: Enabled in these game modes.
 // -
 // Default: ""
 gdb_enabledgamemodes ""
 
+// Enable the Gun Damage Booster in these game mode types.
+// 0 OR 15: ALL
+// 1: Co-op
+// 2: Versus
+// 3: Survival
+// 4: Scavenge
+// -
+// Default: "0"
+// Minimum: "0.000000"
+// Maximum: "15.000000"
+gdb_gamemodetypes "0"
+
 // Damage boost for the Hunting Rifle.
 // -
-// Default: "45"
+// Default: "45.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_hunting "45.0"
 
 // Damage boost for the M16 Assault Rifle.
 // -
-// Default: "40"
+// Default: "40.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_m16 "40.0"
 
 // Damage boost for the M60 Assault Rifle.
 // -
-// Default: "45"
+// Default: "45.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_m60 "45.0"
 
 // Damage boost for the Magnum Pistol.
 // -
-// Default: "25"
+// Default: "25.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_magnum "25.0"
 
 // Damage boost for the Military Sniper Rifle.
 // -
-// Default: "50"
+// Default: "50.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_military "50.0"
 
 // Damage boost for the MP5 SMG.
 // -
-// Default: "30"
+// Default: "30.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_mp5 "30.0"
 
 // Damage boost for the M1911/P220 Pistol.
 // -
-// Default: "20"
+// Default: "20.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_pistol "20.0"
 
 // Damage boost for the Pump Shotgunn.
 // -
-// Default: "20"
+// Default: "20.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_pump "20.0"
 
 // Damage boost for the SCAR-L Desert Rifle.
 // -
-// Default: "40"
+// Default: "40.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_scar "40.0"
 
 // Damage boost for the Scout Sniper Rifle.
 // -
-// Default: "50"
+// Default: "50.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_scout "50.0"
 
 // Damage boost for the SG552 Assault Rifle.
 // -
-// Default: "40"
+// Default: "40.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_sg552 "40.0"
 
 // Damage boost for the Silenced SMG.
 // -
-// Default: "35"
+// Default: "35.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_silenced "35.0"
 
 // Damage boost for the SMG.
 // -
-// Default: "30"
+// Default: "30.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_smg "30.0"
 
 // Damage boost for the SPAS Shotgun.
 // -
-// Default: "25"
+// Default: "25.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_spas "25.0"
 
 // Damage boost for the Tactical Shotgun.
 // -
-// Default: "25"
+// Default: "25.0"
 // Minimum: "0.000000"
-// Maximum: "99999.000000"
+// Maximum: "999999.000000"
 gdb_tactical "25.0"
 ```
 
@@ -203,7 +215,7 @@ gdb_tactical "25.0"
 
 1. How do I enable/disable the plugin in certain game modes?
 
-You must specify the game modes in the gdb_enabledgamemodes and gdb_disabledgamemodes convars.
+You must specify the game modes in the `gdb_enabledgamemodes` and `gdb_disabledgamemodes` convars.
 
 Here are some scenarios and their outcomes:
 
@@ -231,6 +243,7 @@ Outcome: The plugin works only in Versus mode.
 
 ## Credits
 **Crimson_Fox** - For the [Weapon Unlock](https://forums.alliedmods.net/showthread.php?t=114296) plugin.
+**Silvers** - For the code that allows users to enable/disable the plugin in certain game modes.
 
 # Contact Me
 If you wish to contact me for any questions, concerns, suggestions, or criticism, I can be found here:
