@@ -4,6 +4,7 @@
 
 1. Changes:
 
+- Settings for L4D2-exclusive weapons are no longer created in L4D1.
 - Damage boosts are no longer applied against teammates.
 - Damage boosts are now applied to all entities, not just players.
 - Added the `gdb_gamemodetypes` convar. (Thanks to Silvers for the code!)
