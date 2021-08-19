@@ -1,7 +1,7 @@
 # Gun Damage Booster
 
 ## PayPal
-[Donate to my PayPal if you appreciate my work](https://paypal.me/Psyk0tikism?locale.x=en_US)
+[Donate to Motivate](https://paypal.me/Psyk0tikism?locale.x=en_US)
 
 ## Introduction
 I liked the idea of boosting the damage of each gun, so I decided to make this.
