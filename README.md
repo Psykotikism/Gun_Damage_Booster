@@ -8,7 +8,7 @@ I liked the idea of boosting the damage of each gun, so I decided to make this.
 
 ## License
 Gun Damage Booster: a L4D/L4D2 SourceMod Plugin
-Copyright (C) 2017 Alfred "Crasher_3637/Psyk0tik" Llagas
+Copyright (C) 2017 Alfred "Psyk0tik" Llagas
 
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
@@ -248,18 +248,14 @@ Outcome: The plugin works only in Versus mode.
 
 ## Credits
 **Crimson_Fox** - For the [Weapon Unlock](https://forums.alliedmods.net/showthread.php?t=114296) plugin.
+
 **Silvers** - For the code that allows users to enable/disable the plugin in certain game modes.
 
 # Contact Me
 If you wish to contact me for any questions, concerns, suggestions, or criticism, I can be found here:
-- [AlliedModders Forum](https://forums.alliedmods.net/member.php?u=181166)
-- [Steam](https://steamcommunity.com/profiles/76561198056665335)
-- Psyk0tik#7757 on Discord
+- [AlliedModders Forum](https://forums.alliedmods.net/member.php?u=181166) (Use this for just reporting bugs/issues or giving suggestions/ideas.)
+- [Steam](https://steamcommunity.com/profiles/76561198056665335) (Use this for getting to know me or wanting to be friends with me.)
+- `Psyk0tik#6898` on Discord (Use this for pitching in new/better code.)
 
 # 3rd-Party Revisions Notice
 If you would like to share your own revisions of this plugin, please rename the files! I do not want to create confusion for end-users and it will avoid conflict and negative feedback on the official versions of my work. If you choose to keep the same file names for your revisions, it will cause users to assume that the official versions are the source of any problems your revisions may have. This is to protect you (the reviser) and me (the developer)! Thank you!
-
-# Donate
-- [Donate to SourceMod](https://www.sourcemod.net/donate.php)
-
-Thank you very much! :)
