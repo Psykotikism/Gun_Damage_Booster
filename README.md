@@ -31,8 +31,8 @@ SourceMod 1.8.X or higher
 3. Place all the contents into their respective folders.
 4. If prompted to replace or merge anything, click yes.
 5. Load up Gun Damage Booster.
-  - Type `sm_rcon sm plugins load gun_damage_booster` in console.
-  - OR restart the server.
+	- Type `sm_rcon sm plugins load gun_damage_booster` in console.
+	- OR restart the server.
 6. Customize Gun Damage Booster (Config file generated on first load).
 
 ### Uninstalling/Upgrading to Newer Versions
@@ -44,8 +44,8 @@ SourceMod 1.8.X or higher
 ### Disabling
 1. Move `gun_damage_booster.smx` to `plugins/disabled` folder.
 2. Unload Gun Damage Booster.
-  - Type `sm_rcon sm plugins unload gun_damage_booster` in console.
-  - OR restart the server.
+	- Type `sm_rcon sm plugins unload gun_damage_booster` in console.
+	- OR restart the server.
 
 ## Configuration Variables (ConVars/CVars)
 ```
