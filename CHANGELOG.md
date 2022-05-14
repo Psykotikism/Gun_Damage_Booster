@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 7.5 (June 1, 2022)
+
+1. Changes:
+
+- Lowered the limit of the damage boost settings from `999999` to `99999`.
+- Added the `sm_gdb_damage` command. (Requested by `weffer`.)
+- Added the `gdb_friendlyfire` convar.
+- Added the `gdb_launcher` convar. (Requested by `Sunyata`.)
+- Damage boosts are now applied to Witches. (Requested by `Sunyata`.)
+- Made the `gdb_pluginversion` convar unchangeable outside of the source code.
+
 ## Version 7.0 (October 14, 2020)
 
 1. Changes:
@@ -8,7 +19,7 @@
 - Raised the limit of the damage boost settings from `99999` to `999999`.
 - Damage boosts are no longer applied against teammates.
 - Damage boosts are now applied to all entities, not just players.
-- Added the `gdb_gamemodetypes` convar. (Thanks to Silvers for the code!)
+- Added the `gdb_gamemodetypes` convar. (Thanks to `Silvers` for the code!)
 
 ## Version 6.5 (August 23, 2018)
 

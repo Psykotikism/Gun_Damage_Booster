@@ -3,51 +3,37 @@
 ## PayPal
 [Donate to Motivate](https://paypal.me/Psyk0tikism?locale.x=en_US)
 
-## Introduction
-I liked the idea of boosting the damage of each gun, so I decided to make this.
-
 ## License
+> The following license is placed inside the source code of the plugin.
 Gun Damage Booster: a L4D/L4D2 SourceMod Plugin
-Copyright (C) 2017 Alfred "Psyk0tik" Llagas
+Copyright (C) 2022  Alfred "Psyk0tik" Llagas
 
-This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ## About
 Increases each gun's damage.
 
-### What makes Gun Damage Booster viable in Left 4 Dead/Left 4 Dead 2?
-The plugin boosts the damage. Nothing more, nothing less.
+## Requirements
+1. `SourceMod 1.9` or higher
+2. Recommended: [[L4D & L4D2] Left 4 DHooks Direct](https://forums.alliedmods.net/showthread.php?t=321696)
 
-### Requirements
-SourceMod 1.8.X or higher
+## Notes
+1. I do not provide support for listen/local servers but the plugin should still work properly on them.
+2. I will not help you with installing or troubleshooting problems on your part.
+3. If you get errors from SourceMod itself, that is your problem, not mine.
+4. MAKE SURE YOU MEET ALL THE REQUIREMENTS AND FOLLOW THE INSTALLATION GUIDE PROPERLY.
 
-### Installation
-1. Delete files from old versions of the plugin.
-2. Extract the folder inside the .zip file.
-3. Place all the contents into their respective folders.
-4. If prompted to replace or merge anything, click yes.
-5. Load up Gun Damage Booster.
-	- Type `sm_rcon sm plugins load gun_damage_booster` in console.
-	- OR restart the server.
-6. Customize Gun Damage Booster (Config file generated on first load).
+## Commands
+```
+// Accessible by all players.
+sm_gdb_damage - Show current gun damage boost settings.
+```
 
-### Uninstalling/Upgrading to Newer Versions
-1. Delete `gun_damage_booster.smx` from `addons/sourcemod/plugins` folder.
-2. Delete `gun_damage_booster.sp` from `addons/sourcemod/scripting` folder.
-3. Delete `gun_damage_booster.cfg` from `cfg/sourcemod` folder.
-4. Follow the Installation guide above. (Only for upgrading to newer versions.)
-
-### Disabling
-1. Move `gun_damage_booster.smx` to `plugins/disabled` folder.
-2. Unload Gun Damage Booster.
-	- Type `sm_rcon sm plugins unload gun_damage_booster` in console.
-	- OR restart the server.
-
-## Configuration Variables (ConVars/CVars)
+## ConVar Settings
 ```
 // Damage boost for the AK47 Assault Rifle.
 // -
@@ -97,6 +83,15 @@ gdb_enable "1"
 // Default: ""
 gdb_enabledgamemodes ""
 
+// Enable the Gun Damage Booster for friendly-fire?
+// 0: OFF
+// 1: ON
+// -
+// Default: "1"
+// Minimum: "0.000000"
+// Maximum: "1.000000"
+gdb_friendlyfire "0"
+
 // Enable the Gun Damage Booster in these game mode types.
 // 0 OR 15: ALL
 // 1: Co-op
@@ -115,6 +110,13 @@ gdb_gamemodetypes "0"
 // Minimum: "0.000000"
 // Maximum: "999999.000000"
 gdb_hunting "45.0"
+
+// Damage boost for the Grenade Launcher.
+// -
+// Default: "75.0"
+// Minimum: "0.000000"
+// Maximum: "99999.000000"
+gdb_launcher "75.0"
 
 // Damage boost for the M16 Assault Rifle.
 // -
@@ -215,6 +217,28 @@ gdb_spas "25.0"
 gdb_tactical "25.0"
 ```
 
+## Installation
+1. Delete files from old versions of the plugin.
+2. Extract the folder inside the .zip file.
+3. Place all the contents into their respective folders.
+4. If prompted to replace or merge anything, click yes.
+5. Load up `Gun Damage Booster` by doing one of the following:
+- Type `sm_rcon sm plugins unload "gun_damage_booster"` in console.
+- Restart the server.
+6. Customize `Gun Damage Booster` (Config file generated on first load).
+
+## Uninstalling/Upgrading to Newer Versions
+1. Delete `gun_damage_booster.smx` from `addons/sourcemod/plugins` folder.
+2. Delete `gun_damage_booster.sp` from `addons/sourcemod/scripting` folder.
+3. Delete `gun_damage_booster.cfg` from `cfg/sourcemod` folder.
+4. Follow the Installation guide above. (Only for upgrading to newer versions.)
+
+## Disabling
+1. Move `gun_damage_booster.smx` to `plugins/disabled` folder.
+2. Unload `Gun Damage Booster` by doing one of the following:
+- Type `sm_rcon sm plugins unload gun_damage_booster` in console.
+- Restart the server.
+
 ## Questions You May Have
 > If you have any questions that aren't addressed below, feel free to message me or post on this [thread](https://forums.alliedmods.net/showthread.php?t=301641).
 
@@ -226,6 +250,7 @@ Here are some scenarios and their outcomes:
 
 - Scenario 1
 ```
+gdb_gamemodetypes "0" // The plugin is enabled in all game mode types.
 gdb_enabledgamemodes "" // The plugin is enabled in all game modes.
 gdb_disabledgamemodes "coop" // The plugin is disabled in Campaign mode.
 
@@ -233,6 +258,7 @@ Outcome: The plugin works in every game mode except in Campaign mode.
 ```
 - Scenario 2
 ```
+gdb_gamemodetypes "1" // The plugin is enabled in every Campaign-based game mode.
 gdb_enabledgamemodes "coop" // The plugin is enabled in only Campaign mode.
 gdb_disabledgamemodes "" // The plugin is not disabled at all.
 
@@ -240,6 +266,7 @@ Outcome: The plugin works only in Campaign mode.
 ```
 - Scenario 3
 ```
+gdb_gamemodetypes "5" // The plugin is enabled in every Campaign-based and Survival-based game mode.
 gdb_enabledgamemodes "coop,versus" // The plugin is enabled in only Campaign and Versus modes.
 gdb_disabledgamemodes "coop" // The plugin is disabled in Campaign mode.
 
@@ -247,15 +274,14 @@ Outcome: The plugin works only in Versus mode.
 ```
 
 ## Credits
-**Crimson_Fox** - For the [Weapon Unlock](https://forums.alliedmods.net/showthread.php?t=114296) plugin.
+**Crimson_Fox** - For the [[L4D2] Weapon Unlock](https://forums.alliedmods.net/showthread.php?t=114296) plugin.
 
-**Silvers** - For the code that allows users to enable/disable the plugin in certain game modes.
+**Silvers (Silvershot)** - For the code that allows users to enable/disable the plugin in certain game modes.
 
-# Contact Me
-If you wish to contact me for any questions, concerns, suggestions, or criticism, I can be found here:
-- [AlliedModders Forum](https://forums.alliedmods.net/member.php?u=181166) (Use this for just reporting bugs/issues or giving suggestions/ideas.)
-- [Steam](https://steamcommunity.com/profiles/76561198056665335) (Use this for getting to know me or wanting to be friends with me.)
-- `Psyk0tik#6898` on Discord (Use this for pitching in new/better code.)
+**Sunyata, weffer** - For suggesting ideas.
 
-# 3rd-Party Revisions Notice
-If you would like to share your own revisions of this plugin, please rename the files! I do not want to create confusion for end-users and it will avoid conflict and negative feedback on the official versions of my work. If you choose to keep the same file names for your revisions, it will cause users to assume that the official versions are the source of any problems your revisions may have. This is to protect you (the reviser) and me (the developer)! Thank you!
+## Third-Party Revisions Notice
+If you would like to share your own revisions of this plugin, please rename the files so that there is no confusion for users.
+
+## Final Words
+Enjoy all my hard work and have fun with it!
