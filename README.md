@@ -29,8 +29,11 @@ Increases each gun's damage.
 
 ## Commands
 ```
+// Accessible by admins with "z" (Root) flag only.
+sm_boost - Toggle a player's damage boost.
+
 // Accessible by all players.
-sm_gdb_damage - Show current gun damage boost settings.
+sm_damage - Show current gun damage boost settings.
 ```
 
 ## ConVar Settings
@@ -39,21 +42,21 @@ sm_gdb_damage - Show current gun damage boost settings.
 // -
 // Default: "40.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_ak47 "40.0"
 
 // Damage boost for the AWP Sniper Rifle.
 // -
 // Default: "50.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_awp "50.0"
 
 // Damage boost for the Chrome Shotgun.
 // -
 // Default: "20.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_chrome "20.0"
 
 // Disable the Gun Damage Booster in these game modes.
@@ -87,7 +90,7 @@ gdb_enabledgamemodes ""
 // 0: OFF
 // 1: ON
 // -
-// Default: "1"
+// Default: "0"
 // Minimum: "0.000000"
 // Maximum: "1.000000"
 gdb_friendlyfire "0"
@@ -104,11 +107,20 @@ gdb_friendlyfire "0"
 // Maximum: "15.000000"
 gdb_gamemodetypes "0"
 
+// Enable the Gun Damage Booster for everyone?
+// 0: OFF
+// 1: ON
+// -
+// Default: "1"
+// Minimum: "0.000000"
+// Maximum: "1.000000"
+gdb_global "1"
+
 // Damage boost for the Hunting Rifle.
 // -
 // Default: "45.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_hunting "45.0"
 
 // Damage boost for the Grenade Launcher.
@@ -122,98 +134,98 @@ gdb_launcher "75.0"
 // -
 // Default: "40.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_m16 "40.0"
 
 // Damage boost for the M60 Assault Rifle.
 // -
 // Default: "45.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_m60 "45.0"
 
 // Damage boost for the Magnum Pistol.
 // -
 // Default: "25.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_magnum "25.0"
 
 // Damage boost for the Military Sniper Rifle.
 // -
 // Default: "50.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_military "50.0"
 
 // Damage boost for the MP5 SMG.
 // -
 // Default: "30.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_mp5 "30.0"
 
 // Damage boost for the M1911/P220 Pistol.
 // -
 // Default: "20.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_pistol "20.0"
 
 // Damage boost for the Pump Shotgunn.
 // -
 // Default: "20.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_pump "20.0"
 
 // Damage boost for the SCAR-L Desert Rifle.
 // -
 // Default: "40.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_scar "40.0"
 
-// Damage boost for the Scout Sniper Rifle.
+// Damage boost for the Steyr Scout Sniper Rifle.
 // -
 // Default: "50.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_scout "50.0"
 
 // Damage boost for the SG552 Assault Rifle.
 // -
 // Default: "40.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_sg552 "40.0"
 
 // Damage boost for the Silenced SMG.
 // -
 // Default: "35.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_silenced "35.0"
 
 // Damage boost for the SMG.
 // -
 // Default: "30.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_smg "30.0"
 
 // Damage boost for the SPAS Shotgun.
 // -
 // Default: "25.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_spas "25.0"
 
 // Damage boost for the Tactical Shotgun.
 // -
 // Default: "25.0"
 // Minimum: "0.000000"
-// Maximum: "999999.000000"
+// Maximum: "99999.000000"
 gdb_tactical "25.0"
 ```
 
@@ -278,7 +290,7 @@ Outcome: The plugin works only in Versus mode.
 
 **Silvers (Silvershot)** - For the code that allows users to enable/disable the plugin in certain game modes.
 
-**Sunyata, weffer** - For suggesting ideas.
+**Sunyata, gamer_kanelita, weffer, Lagg** - For suggesting ideas.
 
 ## Third-Party Revisions Notice
 If you would like to share your own revisions of this plugin, please rename the files so that there is no confusion for users.

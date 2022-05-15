@@ -5,10 +5,13 @@
 1. Changes:
 
 - Lowered the limit of the damage boost settings from `999999` to `99999`.
-- Added the `sm_gdb_damage` command. (Requested by `weffer`.)
+- Added the `sm_boost` command. (Requested by `gamer_kanelita` and `Lagg`.)
+- Added the `sm_damage` command. (Requested by `weffer`.)
 - Added the `gdb_friendlyfire` convar.
+- Added the `gdb_global` convar.
 - Added the `gdb_launcher` convar. (Requested by `Sunyata`.)
 - Damage boosts are now applied to Witches. (Requested by `Sunyata`.)
+- Added notification flags to each convar.
 - Made the `gdb_pluginversion` convar unchangeable outside of the source code.
 
 ## Version 7.0 (October 14, 2020)
