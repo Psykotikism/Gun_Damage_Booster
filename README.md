@@ -5,6 +5,7 @@
 
 ## License
 > The following license is placed inside the source code of the plugin.
+
 Gun Damage Booster: a L4D/L4D2 SourceMod Plugin
 Copyright (C) 2022  Alfred "Psyk0tik" Llagas
 
@@ -17,6 +18,15 @@ You should have received a copy of the GNU General Public License along with thi
 ## About
 Increases each gun's damage.
 
+## Credits
+**Crimson_Fox** - For the [[L4D2] Weapon Unlock](https://forums.alliedmods.net/showthread.php?t=114296) plugin.
+
+**Silvers (Silvershot)** - For the code that allows users to enable/disable the plugin in certain game modes.
+
+**Sunyata, gamer_kanelita, weffer, Lagg** - For suggesting ideas.
+
+**SourceMod Team** - For continually updating/improving `SourceMod`.
+
 ## Requirements
 1. `SourceMod 1.9` or higher
 2. Recommended: [[L4D & L4D2] Left 4 DHooks Direct](https://forums.alliedmods.net/showthread.php?t=321696)
@@ -26,6 +36,11 @@ Increases each gun's damage.
 2. I will not help you with installing or troubleshooting problems on your part.
 3. If you get errors from SourceMod itself, that is your problem, not mine.
 4. MAKE SURE YOU MEET ALL THE REQUIREMENTS AND FOLLOW THE INSTALLATION GUIDE PROPERLY.
+
+## Features
+1. Boost each weapon's damage.
+2. Boost weapon damage globally or per-player.
+3. Supports CSS weapons.
 
 ## Commands
 ```
@@ -284,13 +299,6 @@ gdb_disabledgamemodes "coop" // The plugin is disabled in Campaign mode.
 
 Outcome: The plugin works only in Versus mode.
 ```
-
-## Credits
-**Crimson_Fox** - For the [[L4D2] Weapon Unlock](https://forums.alliedmods.net/showthread.php?t=114296) plugin.
-
-**Silvers (Silvershot)** - For the code that allows users to enable/disable the plugin in certain game modes.
-
-**Sunyata, gamer_kanelita, weffer, Lagg** - For suggesting ideas.
 
 ## Third-Party Revisions Notice
 If you would like to share your own revisions of this plugin, please rename the files so that there is no confusion for users.
